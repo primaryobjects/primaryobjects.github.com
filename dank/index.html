@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dank Username Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="cover.css" />
+  </head>
+
+  <body>
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Dank Username Generator</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Dank Username Generator</h1>
+            <p class="lead">Generate awesome dank usernames from your name.</p>
+            
+            <div style='border-top: 1px solid #c0c0c0; padding-top: 20px;'>
+              <form>
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Full name</label>
+                      <input type="text" class="form-control" id="name" placeholder="First and last name" required />
+                  </div>      
+                  <button type="submit" class="btn btn-lg btn-primary rainbow">Generate</button>
+              </form>
+            </div>
+
+            <div id="results" style="display: none;">
+              <h3>Results</h3>
+              <div id="output" class="well well-lg" style='margin-top: 20px;'>
+              </div>
+            </div>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>By <a href="http://primaryobjects.com">Kory Becker</a>, <a href="https://twitter.com/primaryobjects">@primaryobjects</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src='dank.js'></script>
+  </body>
+</html>
