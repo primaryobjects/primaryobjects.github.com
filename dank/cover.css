@@ -163,13 +163,27 @@ body {
   }
 }
 
-.btn.rainbow {
+.b1tn.rainbow {
   background: linear-gradient(to right, rgba(59, 141, 189, 1), rgba(216, 0, 255, 1));
   border: 1px solid #fff;
+}
+
+.btn.rainbow:hover {
+  color: white;
+  background: linear-gradient(to right, rgba(89, 171, 210, 1), rgba(246, 0, 255, 1));
+  border: 1px solid blue;
 }
 
 #output {
   color: black;
   font-size: 20px;
   text-shadow: none;
+}
+
+i.fa-heart-o {
+  padding-right: 6px;
+}
+
+.btn:focus,.btn:active {
+   outline: none !important;
 }
