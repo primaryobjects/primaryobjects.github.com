@@ -61,20 +61,3 @@ function longestNames(names) {
     console.log(longestNames(names));
   });
 });*/
-
-$(function() {
-  $('form').submit(function(e) {
-    initialize('words.txt', '\r\n', function(words) {
-      var names = longestNames(dankNames($('#name').val(), words));
-  
-      var output = $('#output').text('');
-      names.forEach(function(name) {
-        output.append(name + '<br/>');
-      });
-  
-      $('#results').fadeIn("slow");
-    });
-
-    return false;
-  });
-});

@@ -28,8 +28,6 @@ html,
 body {
   height: 100%;
   background-color: #333;
-}
-body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
@@ -189,4 +187,25 @@ i.fa-heart-o {
 
 .btn:focus,.btn:active {
    outline: none !important;
+}
+
+section {
+  padding-top:70px;  
+  padding-bottom:50px; 
+  min-height:calc(100% - 1px);
+}
+
+#section-about {
+  background-color: #e5e5ef;
+  color: black;
+  text-shadow: none;
+}
+
+#section-about a {
+  color: black;
+  text-decoration: underline;
+}
+
+#section-about .cover-container {
+  background-color: #e5e5ef;
 }

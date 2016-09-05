@@ -8,52 +8,52 @@
     <link rel="stylesheet" href="cover.css" />
   </head>
 
-  <body>
-<div class="site-wrapper">
-
+  <body data-spy="scroll" data-target="#main-nav">
+    <div class="site-wrapper" id="home">
       <div class="site-wrapper-inner">
-
         <div class="cover-container">
-
           <div class="masthead clearfix">
             <div class="inner">
               <h3 class="masthead-brand">Dank Username Generator</h3>
-              <nav>
+              <nav id="main-nav">
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
+                  <li class="active"><a href="#home">Home</a></li>
+                  <li><a href="#section-about">About</a></li>
                 </ul>
               </nav>
             </div>
           </div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Dank Username Generator</h1>
-            <p class="lead">Generate awesome <a role="button" data-toggle="collapse" href="#dank" aria-expanded="false" aria-controls="dank" style="text-decoration: underline; cursor: help;">dank</a> usernames from your name.</p>
-            <div class="collapse" id="dank">
-              <div class="well">
-                <i class="fa fa-bookmark" aria-hidden="true" style='margin-right: 3px;'></i>
-                "Dank meme": A meme that is just really cool and awesome. Dank memes are words, usually used on online viral social media sites, to imply an inside joke or for other humurous value. Dank memes usually end up overused, to the point of becoming annoying and cliche. Read <a href="http://www.urbandictionary.com/define.php?term=Dank%20Memes" target="_blank" style='color: black; text-decoration: underline;'>more</a>.
+          <section class="container-fluid" id="section-home">
+            <div class="inner cover">
+              <h1 class="cover-heading">Dank Username Generator</h1>
+              <p class="lead">Generate awesome <a role="button" data-toggle="collapse" href="#dank" aria-expanded="false" aria-controls="dank" style="text-decoration: underline; cursor: help;">dank</a> usernames from your name.</p>
+              <div class="collapse" id="dank">
+                <div class="well">
+                  <i class="fa fa-bookmark" aria-hidden="true" style='margin-right: 3px;'></i>
+                  "Dank meme": A meme that is just really cool and awesome. Dank memes are words, usually used on online viral social media sites, to imply an inside joke or for other humurous value. Dank memes usually end up overused, to the point of becoming annoying and cliche. Read <a href="http://www.urbandictionary.com/define.php?term=Dank%20Memes" target="_blank" style='color: black; text-decoration: underline;'>more</a>.
+                </div>
+              </div>
+
+              <div style='border-top: 1px solid #c0c0c0; padding-top: 20px;'>
+                <form>
+                    <div class="form-group">
+                        <label for="name">What's your first and last name?</label>
+                        <input type="text" class="form-control" id="name" placeholder="First and last name" required />
+                    </div>      
+                    <button type="submit" class="btn btn-lg btn-primary rainbow">
+                      <i class="fa fa-heart-o" aria-hidden="true"></i> Generate
+                    </button>
+                </form>
+              </div>
+
+              <div id="results" style="display: none;">
+                <h3>Results</h3>
+                <div id="output" class="well well-lg" style='margin-top: 20px;'>
+                </div>
               </div>
             </div>
-
-            <div style='border-top: 1px solid #c0c0c0; padding-top: 20px;'>
-              <form>
-                  <div class="form-group">
-                      <label for="name">What's your first and last name?</label>
-                      <input type="text" class="form-control" id="name" placeholder="First and last name" required />
-                  </div>      
-                  <button type="submit" class="btn btn-lg btn-primary rainbow">
-                    <i class="fa fa-heart-o" aria-hidden="true"></i> Generate
-                  </button>
-              </form>
-            </div>
-
-            <div id="results" style="display: none;">
-              <h3>Results</h3>
-              <div id="output" class="well well-lg" style='margin-top: 20px;'>
-              </div>
-            </div>
-          </div>
+          </section>
 
           <div class="mastfoot">
             <div class="inner">
@@ -67,16 +67,53 @@
               </p>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
+
+    <section class="container-fluid" id="section-about">
+      <div class="cover-container">
+        <h1 class="cover-heading">How Does It Work?</h1>
+        <div class="inner">
+          <p>
+            Depending on your name, you may have some pretty interesting usernames that you could use for your social profile accounts! This app searches a dictionary of English words to locate matches within your name. The search tries to match every letter in each word to a consective letter in your name.
+          </p>
+          <p>
+            For example, "Matthew Emes" matches "memes". "Danny Kyung" matches "dank".
+          </p>
+          <p>
+            If you're interested in more technical details, the code finds the longest matching dictionary word that is a substring, but not necessarily consecutively (ie., a sparse substring) within your name. Only matches with the maximum length are shown in the output. The dictionary word list comes from the <a href="http://norvig.com/ngrams/enable1.txt" target="_blank">Enable</a> word list.
+          </p>
+          <p>
+            Here are some additional examples:
+          </p>
+          <h4>Example Inputs</h4>
+
+          <ul style="list-style: none; padding: 0;">
+            <li>Donald Knuth</li>
+            <li>Alan Turing</li>
+            <li>Claude Shannon</li>
+          </ul>
+
+          <h4>Example Outputs</h4>
+
+          <ul style="list-style: none; padding: 0;">
+            <li>Donut</li>
+            <li>Alanin, Anting</li>
+            <li>Cannon</li>
+          </ul>
+
+          <p>
+            What does your name match? Find out!
+          </p>
+        </div>
+      </div>
+    </section>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src='dank.js'></script>
+    <script src='script.js'></script>
   </body>
 </html>
