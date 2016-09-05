@@ -174,10 +174,13 @@ body {
   border: 1px solid blue;
 }
 
-#output {
+.well {
   color: black;
-  font-size: 20px;
   text-shadow: none;
+}
+
+#output {
+  font-size: 20px;
 }
 
 i.fa-heart-o {
