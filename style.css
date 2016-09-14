@@ -1,0 +1,14 @@
+body {
+  font-family: Verdana;
+  font-size: 14px;
+}
+
+.left {
+  float: left;
+  margin: 10px 50px 10px 10px;
+  padding: 0 30px 0 0;
+}
+
+.side-border {
+  border-right: 1px solid #ccc;
+}
