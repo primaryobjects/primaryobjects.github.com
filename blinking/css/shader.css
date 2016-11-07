@@ -1,0 +1,751 @@
+/*
+        Page
+==================================================================================================*/
+
+html {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: table-cell;
+    margin: 0;
+    vertical-align: middle;
+    text-align: center;
+    font: 300 20px/1.4 Roboto, 'Open Sans', Helvetica, Arial, sans-serif;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.66);
+    background: #4D4646 50% 50% no-repeat;
+    background-size: cover;
+}
+
+
+
+
+
+/*
+        Background
+==================================================================================================*/
+
+.background-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+/* Hide background in old Opera because of lags */
+noindex:-o-prefocus, .background-container {
+    display: none;
+}
+
+.background-vignette,
+.background-noise {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.background-vignette {
+    background-image: -webkit-radial-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.8) 100%);
+    background-image: radial-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.8) 100%);
+
+    /* IE9 workaround */
+    -webkit-box-shadow: inset 0 0 600px #000 \9;
+    box-shadow: inset 0 0 600px #000 \9;
+}
+
+.background-noise {
+    background: url(data:image/png;base64,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);
+    opacity: 0.85;
+}
+
+
+
+
+
+/*
+        Links
+==================================================================================================*/
+
+a {
+    color: #32a7d3;
+}
+
+a:hover,
+a:focus {
+    color: #2588ad;
+}
+
+
+
+
+
+/*
+        Layout
+==================================================================================================*/
+
+.content {
+    padding: 40px 0;
+    position: relative;
+}
+
+
+
+
+
+/*
+        Text content
+==================================================================================================*/
+
+.header {
+    margin-bottom: 30px;
+    font-size: 80px;
+    line-height: 1.2;
+    font-weight: 100;
+}
+
+.description {
+    margin-bottom: 60px;
+}
+
+
+
+
+
+/*
+        Countdown
+==================================================================================================*/
+
+.countdown {
+    padding: 30px 0 45px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.countdown-label {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.countdown-number {
+    font-size: 31px;
+    line-height: 1;
+    font-weight: 100;
+    text-shadow: none;
+}
+
+
+
+
+
+/*
+        Form and links container
+==================================================================================================*/
+
+.form-and-links-container {
+    padding-bottom: 25px;
+    overflow: hidden;
+}
+
+
+
+
+
+/*
+        Subscription form
+==================================================================================================*/
+
+.subscription-form {
+    margin: 0;
+    padding: 0 15px 15px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+
+/*      Email field
+----------------------------------------------------------*/
+
+.subscription-form-email {
+    width: 450px;
+    height: 50px;
+    padding: 0 12px;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    font-size: 20px;
+    line-height: 1.4;
+    font-family: inherit;
+    font-weight: inherit;
+    color: #222;
+    text-shadow: none;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.subscription-form-email:focus {
+    padding: 0 12px 0 9px;
+    color: #222;
+    border-width: 3px 0 3px 3px;
+    border-style: solid;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.subscription-form-email:invalid:focus:invalid {
+    box-shadow: none;
+}
+
+/* IE8 hack for vertical text aligning in the email field */
+@media \0screen {
+    .subscription-form-email {
+        padding-top: 11px;
+    }
+
+    .subscription-form-email:focus {
+        padding-top: 8px;
+    }
+}
+
+/* Placeholder */
+::-webkit-input-placeholder {
+    color: #777;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: #777;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #777;
+}
+
+:-ms-input-placeholder {
+    color: #777;
+}
+
+
+
+/*      Button
+----------------------------------------------------------*/
+
+.subscription-form-submit {
+    height: 50px;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: inherit;
+    color: #fff;
+    text-shadow: none;
+    border: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-transition: 0.15s;
+    -moz-transition: 0.15s;
+    transition: 0.15s;
+}
+
+.subscription-form-submit:hover,
+.subscription-form-submit:focus,
+.subscription-form-submit:active,
+.subscription-form-submit:focus:active {
+    color: #fff;
+    outline: none;
+}
+
+.subscription-form-submit {
+    width: 120px;
+    margin-left: 0 !important;
+}
+
+
+
+/*      Tooltip
+----------------------------------------------------------*/
+
+.subscription-form-tooltip {
+    margin: -5px 0 0;
+    padding: 8px 15px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    z-index: 1;
+    text-shadow: none;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+.subscription-form-tooltip:before {
+    content: '';
+    margin: -8px 0 0 -8px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    border: solid transparent;
+    border-width: 0 8px 8px;
+}
+
+.subscription-form-tooltip.error {
+    color: #fff;
+    background: #d44032;
+}
+
+.subscription-form-tooltip.error:before {
+    border-bottom-color: #d44032;
+}
+
+.subscription-form-tooltip.success {
+    color: #fff;
+    background: #00b159;
+}
+
+.subscription-form-tooltip.success:before {
+    border-bottom-color: #00b159;
+}
+
+
+
+
+
+/*
+        Social links
+==================================================================================================*/
+
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 0;
+    vertical-align: middle;
+    line-height: 1;
+    background: transparent;
+}
+
+.social-links {
+    margin-top: 50px;
+    font-size: 0;
+}
+
+.social-links > a {
+    width: 50px;
+    height: 50px;
+    margin: 6px;
+    font-size: 28px;
+    line-height: 54px;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: none;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.social-links > a:hover,
+.social-links > a:focus {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+
+
+
+
+/*
+        Responsiveness
+==================================================================================================*/
+
+@media (max-width: 1200px) {
+    /* Hide background on small devices */
+    .background-container {
+        display: none;
+    }
+}
+
+@media (max-width: 979px) {
+    .header {
+        font-size: 64px;
+    }
+
+    .countdown {
+        padding: 20px 0 25px;
+    }
+
+    .countdown-number {
+        font-size: 24px;
+    }
+
+    .subscription-form-email {
+        width: 306px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    body {
+        padding: 20px;
+    }
+
+    body,
+    .subscription-form-email,
+    .subscription-form-submit {
+        font-size: 18px;
+    }
+
+    .header {
+        font-size: 56px;
+    }
+
+    .countdown-item {
+        width: 50%;
+        margin: 20px 0;
+        float: left;
+    }
+
+    .countdown-number {
+        font-size: 20px;
+    }
+
+    .countdown-label {
+        margin-top: 5px;
+    }
+
+    .subscription-form {
+        padding: 0 0 35px;
+    }
+
+    .subscription-form-email {
+        width: 310px;
+        height: 40px;
+        padding: 0 8px;
+
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .subscription-form-email:focus {
+        padding: 0 8px 0 5px;
+    }
+
+    .subscription-form-submit {
+        width: 100px;
+        height: 40px;
+    }
+
+    .subscription-form-tooltip {
+        margin-top: -25px;
+        padding: 4px 10px;
+        white-space: normal;
+    }
+
+    .social-links > a {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        line-height: 42px;
+    }
+}
+
+@media (max-width: 550px) {
+    .subscription-form,
+    .subscription-form .input-group,
+    .subscription-form .subscription-form-email,
+    .subscription-form .input-group-btn {
+        display: block;
+        float: none;
+
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .subscription-form .input-group-btn,
+    .subscription-form .subscription-form-submit {
+        width: 100%;
+    }
+
+    .subscription-form .subscription-form-email {
+        margin-bottom: 15px;
+    }
+
+    .subscription-form .subscription-form-email:focus {
+        border-right-width: 3px;
+    }
+}
+
+
+
+
+
+/*
+        Themes
+==================================================================================================*/
+
+/*      Fire
+----------------------------------------------------------*/
+
+.theme-fire {
+    background-image: url("../img/fire.shader-bg.jpg");
+}
+
+.theme-fire .subscription-form-email:focus {
+    border-color: #d44032;
+}
+
+.theme-fire .subscription-form-submit {
+    background: #d44032;
+}
+
+.theme-fire .subscription-form-submit:hover,
+.theme-fire .subscription-form-submit:focus {
+    background: #c33629;
+}
+
+.theme-fire .subscription-form-submit:active {
+    background: #a62e23;
+}
+
+.theme-fire .social-links > a:hover,
+.theme-fire .social-links > a:focus {
+    background: #d44032;
+}
+
+
+
+/*      Ice
+----------------------------------------------------------*/
+
+.theme-ice {
+    background-image: url("../img/ice.shader-bg.jpg");
+}
+
+.theme-ice .subscription-form-email:focus {
+    border-color: #56828B;
+}
+
+.theme-ice .subscription-form-submit {
+    background: #56828B;
+}
+
+.theme-ice .subscription-form-submit:hover,
+.theme-ice .subscription-form-submit:focus {
+    background: #497078;
+}
+
+.theme-ice .subscription-form-submit:active {
+    background: #38565C;
+}
+
+.theme-ice .social-links > a:hover,
+.theme-ice .social-links > a:focus {
+    background: #56828B;
+}
+
+
+
+/*      Nature
+----------------------------------------------------------*/
+
+.theme-nature {
+    background-image: url("../img/nature.shader-bg.jpg");
+}
+
+.theme-nature .subscription-form-email:focus {
+    border-color: #00b159;
+}
+
+.theme-nature .subscription-form-submit {
+    background: #00b159;
+}
+
+.theme-nature .subscription-form-submit:hover,
+.theme-nature .subscription-form-submit:focus {
+    background: #00984c;
+}
+
+.theme-nature .subscription-form-submit:active {
+    background: #00743a;
+}
+
+.theme-nature .social-links > a:hover,
+.theme-nature .social-links > a:focus {
+    background: #00b159;
+}
+
+
+
+/*      Light
+----------------------------------------------------------*/
+
+.theme-light {
+    background-image: url("../img/light.shader-bg.jpg");
+}
+
+.theme-light .subscription-form-email:focus {
+    border-color: #DBBA48;
+}
+
+.theme-light .subscription-form-submit {
+    background: #DBBA48;
+}
+
+.theme-light .subscription-form-submit:hover,
+.theme-light .subscription-form-submit:focus {
+    background: #C1A01E;
+}
+
+.theme-light .subscription-form-submit:active {
+    background: #957B17;
+}
+
+.theme-light .social-links > a:hover,
+.theme-light .social-links > a:focus {
+    background: #DBBA48;
+}
+
+
+
+/*      Darkness
+----------------------------------------------------------*/
+
+.theme-darkness {
+    background-image: url("../img/background.jpg");
+}
+
+.theme-darkness .subscription-form-email:focus {
+    border-color: #999;
+}
+
+.theme-darkness .subscription-form-submit {
+    background: #999;
+}
+
+.theme-darkness .subscription-form-submit:hover,
+.theme-darkness .subscription-form-submit:focus {
+    background: #777;
+}
+
+.theme-darkness .subscription-form-submit:active {
+    background: #555;
+}
+
+.theme-darkness .social-links > a:hover,
+.theme-darkness .social-links > a:focus {
+    background: #999;
+}
+
+
+
+/*      Candy
+----------------------------------------------------------*/
+
+.theme-candy {
+    background-image: url("../img/candy.shader-bg.jpg");
+}
+
+.theme-candy .subscription-form-email:focus {
+    border-color: #BF526B;
+}
+
+.theme-candy .subscription-form-submit {
+    background: #BF526B;
+}
+
+.theme-candy .subscription-form-submit:hover,
+.theme-candy .subscription-form-submit:focus {
+    background: #9F3C52;
+}
+
+.theme-candy .subscription-form-submit:active {
+    background: #803143;
+}
+
+.theme-candy .social-links > a:hover,
+.theme-candy .social-links > a:focus {
+    background: #BF526B;
+}
+
+
+
+/*      Peach
+----------------------------------------------------------*/
+
+.theme-peach {
+    background-image: url("../img/peach.shader-bg.jpg");
+}
+
+.theme-peach .subscription-form-email:focus {
+    border-color: #F97C53;
+}
+
+.theme-peach .subscription-form-submit {
+    background: #F97C53;
+}
+
+.theme-peach .subscription-form-submit:hover,
+.theme-peach .subscription-form-submit:focus {
+    background: #D75B2D;
+}
+
+.theme-peach .subscription-form-submit:active {
+    background: #B04922;
+}
+
+.theme-peach .social-links > a:hover,
+.theme-peach .social-links > a:focus {
+    background: #F97C53;
+}
+
+
+
+/*      Sea
+----------------------------------------------------------*/
+
+.theme-sea {
+    background-image: url("../img/sea.shader-bg.jpg");
+}
+
+.theme-sea .subscription-form-email:focus {
+    border-color: #4F9D8B;
+}
+
+.theme-sea .subscription-form-submit {
+    background: #4F9D8B;
+}
+
+.theme-sea .subscription-form-submit:hover,
+.theme-sea .subscription-form-submit:focus {
+    background: #489181;
+}
+
+.theme-sea .subscription-form-submit:active {
+    background: #3E796B;
+}
+
+.theme-sea .social-links > a:hover,
+.theme-sea .social-links > a:focus {
+    background: #4F9D8B;
+}
