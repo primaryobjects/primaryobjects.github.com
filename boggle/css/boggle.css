@@ -1,0 +1,50 @@
+.grid-control table {
+  width: 0;
+}
+
+.cell-control {
+  border: 1px solid #fdd;
+  width: 50px;
+  height: 50px;
+}
+
+.cell-control:hover {
+  border: 3px solid #fdd;
+}
+
+.cell-control input {
+  font-size: 26px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cell-control input:hover {
+  background-color: #35aaff;
+}
+
+.solve-btn {
+	margin-left: 50px;
+}
+
+.div-results {
+  max-height: 325px;
+  overflow-y: auto;
+}
+
+#main-app table.highlight>tbody>tr:hover {
+  background-color: #35aaff;
+}
+
+#main-app ::-webkit-scrollbar {
+    width: 16px;
+}
+ 
+#main-app ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 5px;
+}
+ 
+#main-app ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
