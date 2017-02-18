@@ -44,6 +44,7 @@ var SolveManager = {
     }
   
     self.postMessage({ status: 'Complete!', done: true, results: result.sort(function(a, b) { return b.score - a.score }) });
+    self.close();
   },
 
   // Returns all valid words from a starting point on the board.
