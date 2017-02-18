@@ -1,3 +1,7 @@
+.btn.solve-btn:hover {
+  background-color: magenta;
+}
+
 .grid-control table {
   width: 0;
 }
