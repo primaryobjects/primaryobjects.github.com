@@ -17,5 +17,5 @@ var PubSubManager = {
 $(function() {
   setTimeout(function() {
     ReactDOM.render(React.createElement(MyComponent, { context: PubSubManager }), document.getElementById('root'));
-  }, 0);
+  }, 250);
 });
