@@ -16,7 +16,7 @@ var PubSubManager = {
 $(function() {
   setTimeout(function() {
     ReactDOM.render(React.createElement(MyComponent, { context: PubSubManager }), document.getElementById('root'));
-  }, 0);
+  }, 250);
 
   // Change the box color every few seconds.
   setInterval(function() {
