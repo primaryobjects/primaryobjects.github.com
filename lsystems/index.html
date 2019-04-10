@@ -1,0 +1,20 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div class="container">
+      <h1>L-Systems</h1>
+      <p class="lead">Click inside the square! This is a demo of using a <a href='https://en.wikipedia.org/wiki/L-system' target='_blank'>Lindenmayer system</a> to draw patterns using a basic implementation of <a href='https://en.wikipedia.org/wiki/Logo_(programming_language)' target='_blank'>Logo</a>. The pattern is drawn using a heuristic based upon a formula for X and Y movement. The formula is defined using the grammar shown below. The default value is the <a href='https://en.wikipedia.org/wiki/L-system#Example_6:_Dragon_curve' target='_blank'>Dragon</a> pattern!</p>
+      <p>
+        X = Run the formula for X, Y = Run the formula for Y, F = Move forward by n steps, + = Turn right, - = Turn left
+      </p>
+      <div id="root"></div>
+    </div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="script.js" type="text/babel"></script>
+  </body>
+</html>

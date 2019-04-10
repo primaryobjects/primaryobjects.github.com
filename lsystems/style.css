@@ -1,0 +1,12 @@
+canvas {
+  position: absolute;
+  top: 310px;
+}
+
+.turtle {
+  position: absolute;
+  top: 310px;
+  border: 1px dashed #c0c0c0;
+  width: 1200px;
+  height: 1200px;
+}
