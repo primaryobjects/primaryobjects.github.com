@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <title>Isolation - AI Game Using Minimax with Alpha-Beta Pruning</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class='container'>
+      <h1>Isolation</h1>
+      <p class="lead text-muted">The goal of the game is to be the last player with an available move. Play against an AI developed using Minimax with Alpha-beta pruning.</p>
+      <p>
+      <div id='root'></div>
+    </div>
+
+    <div class='container'>
+      <div id='graph'></div>
+    </div>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="http://primaryobjects.com">primaryobjects.com</a>
+        </p>
+        <p>Developed by Kory Becker 2020</a></p>
+      </div>
+    </footer>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.10.2/umd/react.production.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.10.2/umd/react-dom.production.min.js'></script>
+    <script type="text/babel" src="js/components/cell.js"></script>
+    <script type="text/babel" src="js/components/grid.js"></script>
+    <script type="text/babel" src="js/components/player.js"></script>
+    <script type="text/babel" src="js/components/isolation.js"></script>
+    <script type="text/babel" src="js/components/isolationContainer.js"></script>
+    <script type="text/babel" src="js/managers/isolationManager.js"></script>
+    <script type="text/babel" src="js/managers/heuristicManager.js"></script>
+    <script type="text/babel" src="js/managers/strategyManager.js"></script>
+    <script type="text/babel" src="js/index.js"></script>
+  </body>
+</html>
