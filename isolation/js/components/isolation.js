@@ -12,6 +12,7 @@ class Isolation extends React.Component {
       width: props.width,
       height: props.height,
       treeDepth: props.treeDepth,
+      miniMaxDepth: props.miniMaxDepth,
     };
 
     this.state.players[0].moves = IsolationManager.allMoves(0, this.state.players, props.width, props.height);
@@ -22,7 +23,7 @@ class Isolation extends React.Component {
   }
 
   componentDidUpdate(nextProps) {
-    const { strategy, heuristic, width, height, treeDepth } = this.props;
+    const { strategy, heuristic, width, height, treeDepth, miniMaxDepth } = this.props;
 
     if (strategy && nextProps.strategy !== strategy) {
       this.setState({ strategy });
@@ -42,6 +43,10 @@ class Isolation extends React.Component {
 
     if (treeDepth && nextProps.treeDepth !== treeDepth) {
       this.setState({ treeDepth });
+    }
+
+    if (miniMaxDepth && nextProps.miniMaxDepth !== miniMaxDepth) {
+      this.setState({ miniMaxDepth });
     }
   }
 
@@ -70,7 +75,7 @@ class Isolation extends React.Component {
           if (this.state.strategy && this.state.strategy !== StrategyManager.none) {
           // AI turn.
           setTimeout(() => {
-            const tree = StrategyManager.tree(playerIndex, JSON.parse(JSON.stringify(players)), values, this.grid.current.props.width, this.grid.current.props.height, this.state.round, this.state.heuristic);
+            const tree = StrategyManager.tree(playerIndex, JSON.parse(JSON.stringify(players)), values, this.grid.current.props.width, this.grid.current.props.height, this.state.round, this.state.heuristic, this.state.miniMaxDepth);
             StrategyManager.renderTree(tree, this.state.treeDepth);
 
             // Get the AI's move.

@@ -49,3 +49,7 @@
 .gamePlayOptions span {
   margin-right: 12px;
 }
+
+.gamePlayOptions input[type='number'] {
+  width: 50px;
+}

@@ -110,8 +110,7 @@ const StrategyManager = {
     return bestState ? { x: bestState.players[bestState.activePlayer].x, y: bestState.players[bestState.activePlayer].y } : { x: 1, y: 1 };
   },
 
-  tree: function(playerIndex, players, values, width, height, round, heuristic, maxDepth = 4) {
-    //playerIndex = 0; // Always use scores for human player.
+  tree: function(playerIndex, players, values, width, height, round, heuristic, maxDepth) {
     const referencePlayerIndex = !playerIndex ? 1 : 0; // Point-of-view for the player that the tree is calculated for. The root node will be from the opposing player.
     console.log(round);
 
