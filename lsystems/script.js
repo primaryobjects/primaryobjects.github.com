@@ -135,7 +135,7 @@ class Pattern extends React.Component {
 
   render() {
     return (
-      <div class='turtle' onClick={ this.onclick }></div>
+      <div className='turtle' onClick={ this.onclick }></div>
     );
   }
 }
@@ -218,25 +218,25 @@ class Canvas extends React.Component {
     return(
       <div id='canvas-container'>
         <form>
-          <div class="form-group">
-            <div class='row'>
-              <div class='col-auto'>
-                <label for="formulaX">Formula X</label>
-                <input type="text" class="form-control" id="formulaX" aria-describedby="formulaXHelp" placeholder="Enter a formula" value={this.state.formulaX} onChange={this.onX} />
-                <small id="formulaXHelp" class="form-text text-muted">The heuristic for how the pen should move on the x-axis.</small>
+          <div className="form-group">
+            <div className='row'>
+              <div className='col-auto'>
+                <label htmlFor="formulaX">Formula X</label>
+                <input type="text" className="form-control" id="formulaX" aria-describedby="formulaXHelp" placeholder="Enter a formula" value={this.state.formulaX} onChange={this.onX} />
+                <small id="formulaXHelp" className="form-text text-muted">The heuristic for how the pen should move on the x-axis.</small>
               </div>
-              <div class='col-auto'>
-                <label for="formulaY">Formula Y</label>
-                <input type="text" class="form-control" id="formulaY" aria-describedby="formulaYHelp" placeholder="Enter a formula" value={this.state.formulaY} onChange={this.onY} />
-                <small id="formulaYHelp" class="form-text text-muted">The heuristic for how the pen should move on the y-axis.</small>
+              <div className='col-auto'>
+                <label htmlFor="formulaY">Formula Y</label>
+                <input type="text" className="form-control" id="formulaY" aria-describedby="formulaYHelp" placeholder="Enter a formula" value={this.state.formulaY} onChange={this.onY} />
+                <small id="formulaYHelp" className="form-text text-muted">The heuristic for how the pen should move on the y-axis.</small>
               </div>
-              <div class='col-auto btn'>
-                <button type="button" id="clear" class="btn btn-secondary mt-4" onClick={this.onClear}>Clear</button>
+              <div className='col-auto btn'>
+                <button type="button" id="clear" className="btn btn-secondary mt-4" onClick={this.onClear}>Clear</button>
               </div>
             </div>
           </div>
         </form>
-        <div class='canvas'>
+        <div className='canvas'>
           <canvas width={1200} height={1200} ref={ this.canvas }></canvas>
           <Square orientation={1} color='pink' onRef={ ref => (this.children.push(ref)) }/>
           <Dragon color='rainbow' typeX={this.state.formulaX} typeY={this.state.formulaY} count={8} onRef={ ref => (this.children.push(ref)) }/>
