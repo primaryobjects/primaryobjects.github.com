@@ -168,7 +168,7 @@ const StrategyManager = {
       const id = `node-${index++}-${node.depth}-${player1.x}-${player1.y}`;
 
       // Append a new div line to the output.
-      graph.append(`<div id='xx'></div><div id='header-${id}' class='ml-${node.depth}'>Depth: ${node.depth}, Player 1: (${player1.x}, ${player1.y}), Player 2: (${player2.x}, ${player2.y}), Score: ${node.tree.score}, Active Player: ${ node.tree.activePlayer }, Moves: ${JSON.stringify(node.tree.moves)}<div id='${id}'</div></div>`);
+      graph.append(`<div id='xx'></div><div id='header-${id}' style='margin-left: ${node.depth * 25 }px'>Depth: ${node.depth}, Player 1: (${player1.x}, ${player1.y}), Player 2: (${player2.x}, ${player2.y}), Score: ${node.tree.score}, Active Player: ${ node.tree.activePlayer }, Moves: ${JSON.stringify(node.tree.moves)}<div id='${id}'</div></div>`);
 
       // Render a mini version of the grid for this state.
       ReactDOM.render(
