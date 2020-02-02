@@ -73,6 +73,11 @@ class IsolationContainer extends React.Component {
                 <input type="radio" name="heuristic" value="simple" checked={this.state.heuristic === HeuristicManager.simple} onChange={ this.onHeuristic }/> <span>Simple</span>
                 <input type="radio" name="heuristic" value="offensive" checked={this.state.heuristic === HeuristicManager.offensive} onChange={ this.onHeuristic }/> <span>Offensive</span>
                 <input type="radio" name="heuristic" value="defensive" checked={this.state.heuristic === HeuristicManager.defensive} onChange={ this.onHeuristic }/> <span>Defensive</span>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col'>
+                <input type="radio" name="heuristic" value="aggressive" checked={this.state.heuristic === HeuristicManager.aggressive} onChange={ this.onHeuristic }/> <span>Aggressive</span>
                 <input type="radio" name="heuristic" value="offensiveToDefensive" checked={this.state.heuristic === HeuristicManager.offensiveToDefensive} onChange={ this.onHeuristic }/> <span>Offensive to Defensive</span>
                 <input type="radio" name="heuristic" value="defensiveToOffensive" checked={this.state.heuristic === HeuristicManager.defensiveToOffensive} onChange={ this.onHeuristic }/> <span>Defensive to Offensive</span>
               </div>

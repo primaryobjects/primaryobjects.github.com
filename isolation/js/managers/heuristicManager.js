@@ -14,6 +14,11 @@ const HeuristicManager = {
     return playerMoves  - (opponentMoves * 2);
   },
 
+  aggressive: function(playerMoves, opponentMoves) {
+    // Favor minimizing the available moves for the opponent.
+    return 10  - opponentMoves;
+  },
+
   defensiveToOffensive: function(playerMoves, opponentMoves, width, height, round) {
     // Early game, play a defensive strategy. Late game, play an offensive strategy.
     const ratio = round / (width * height);
