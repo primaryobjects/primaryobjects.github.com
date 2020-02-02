@@ -8,7 +8,7 @@ class IsolationContainer extends React.Component {
       width: props.width || 3,
       height: props.height || 3,
       treeDepth: props.treeDepth || 25,
-      miniMaxDepth: props.miniMaxDepth || 4,
+      miniMaxDepth: props.miniMaxDepth || 6,
     };
 
     this.onStrategy = this.onStrategy.bind(this);
