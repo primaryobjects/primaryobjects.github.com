@@ -8,9 +8,15 @@ const WumpusManager = {
     breeze: 4,
     stench: 5,
     glitter: 6,
-    arrow: 7,
-    pittile: 8,
-    crossbones: 9,
+    question: 7,
+    arrow: 8,
+    pittile: 9,
+    crossbones: 10,
+    arrowState: {
+      none: 0,
+      armed: 1,
+      fired: 2,
+    },
   },
 
   generate: (width, height) => {
@@ -114,10 +120,13 @@ const WumpusManager = {
       case WumpusManager.constants.gold:
         icon = 'fa fa-gem';
         break;
+      case WumpusManager.constants.question:
+        icon = 'fas fa-question-circle';
+        break;
       case WumpusManager.constants.arrow:
         icon = 'fas fa-bullseye';
         break;
-      case WumpusManager.constants.crossbones:
+        case WumpusManager.constants.crossbones:
         icon = 'fas fa-skull-crossbones';
         break;
       case WumpusManager.constants.breeze:
