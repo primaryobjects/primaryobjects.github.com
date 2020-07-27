@@ -16,6 +16,7 @@ const WumpusManager = {
       none: 0,
       armed: 1,
       fired: 2,
+      kill: 3,
     },
   },
 
@@ -84,7 +85,7 @@ const WumpusManager = {
     WumpusManager.addHint(wumpus, WumpusManager.constants.stench, rows, width, height);
     WumpusManager.addHint(gold, WumpusManager.constants.glitter, rows, width, height);
 
-    return rows;
+    return { map: rows, gold, wumpus };
   },
 
   addHint: (entity, hint, rows, width, height) => {
@@ -102,6 +103,19 @@ const WumpusManager = {
     }
 
     return rows;
+  },
+
+  direction(a, b) {
+    // Calculates the direction of object b with respect to object a.
+    let direction;
+    if (a.x === b.x) {
+      direction = b.y > a.y ? 'down' : 'up';
+    }
+    else if (a.y === b.y) {
+      direction = b.x > a.x ? 'right' : 'left';
+    }
+
+    return direction;
   },
 
   icon(goal) {
