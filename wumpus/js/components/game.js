@@ -8,6 +8,8 @@ class Game extends React.Component {
     this.reset = this.reset.bind(this);
     this.print = this.print.bind(this);
     this.onGrid = this.onGrid.bind(this);
+    this.displayMoves = this.displayMoves.bind(this);
+    this.updateAI = this.updateAI.bind(this);
   }
 
   getState(props) {
@@ -16,6 +18,9 @@ class Game extends React.Component {
 
     // Callback handler for parent container to update the arrow count and disable the shoot button.
     this.props.updateArrows();
+
+    // Initialize the AI agent.
+    AiManager.initialize(0, props.height - 1, width, height);
 
     return {
       width,
@@ -30,13 +35,24 @@ class Game extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.cheatMode && this.displayMoves();
+
+    // Update the AI agent.
+    this.updateAI();
+  }
+
   componentDidUpdate(nextProps) {
-    const { width, height, arrowState, reset } = this.props;
+    const { width, height, arrowState, reset, cheatMode } = this.props;
 
     if ((width && nextProps.width !== width) ||
         (height && nextProps.height !== height) ||
         (reset && nextProps.reset !== reset)) {
       this.reset();
+    }
+
+    if (nextProps.cheatMode !== cheatMode) {
+      this.displayMoves();
     }
 
     if (nextProps.arrowState !== arrowState) {
@@ -45,7 +61,30 @@ class Game extends React.Component {
   }
 
   reset() {
-    this.setState(this.getState(this.props));
+    this.setState(this.getState(this.props), () => {
+      // Display available player moves, if cheat mode is enabled.
+      this.props.cheatMode && this.displayMoves();
+
+      // Update the AI agent.
+      this.updateAI();
+    });
+  }
+
+  displayMoves() {
+    // Clear moves.
+    this.state && this.state.availableMoves && this.state.availableMoves.forEach(move => {
+      this.grid.current.setValue(move.x, move.y, null);
+    });
+
+    if (this.props.cheatMode) {
+      // Calculate available moves for player.
+      const availableMoves = GameManager.moves(this.state.x, this.state.y, this.props.width, this.props.height);
+      availableMoves.forEach(move => {
+        this.grid.current.setValue(move.x, move.y, 'aliceblue');
+      });
+
+      this.setState({ availableMoves });
+    }
   }
 
   update(room) {
@@ -64,7 +103,6 @@ class Game extends React.Component {
       this.print('You shoot!', `You hear a thump on the ground.`, 'black', WumpusManager.constants.arrow, -2);
     }
     else if (this.props.arrowState === WumpusManager.constants.arrowState.none) {
-      console.log('You put down your bow.');
       this.print();
     }
 
@@ -99,6 +137,9 @@ class Game extends React.Component {
         gameOk = false;
       }
     }
+
+    // Update the AI agent.
+    this.updateAI(!gameOk);
 
     return gameOk;
   }
@@ -159,12 +200,15 @@ class Game extends React.Component {
         }
 
         if (isMove && GameManager.isValidMove(x, y, this.state.x, this.state.y, this.grid.current.props.width, this.grid.current.props.height)) {
-          // Update player location with new move.
+          // Update player location with new mofve.
           playerLocation = { x, y };
         }
 
         // Update state.
         this.setState({ dungeon, message, x: playerLocation.x, y: playerLocation.y, moves: this.state.moves + 1 }, () => {
+          // Update available player moves.
+          this.props.cheatMode && this.displayMoves();
+
           if (!this.update(this.state.dungeon.map[playerLocation.y][playerLocation.x])) {
             // Game over.
             this.setState({ gameOver: true });
@@ -180,6 +224,18 @@ class Game extends React.Component {
     }
     else {
       console.log('Tilt!');
+    }
+  }
+
+  updateAI(isGameOver) {
+    // Clear old hint.
+    this.state.bestMove && this.grid.current.setValue(this.state.bestMove.x, this.state.bestMove.y, null);
+
+    if (!isGameOver) {
+      // Show hint for best move.
+      const bestMove = AiManager.update(this.state.x, this.state.y, this.state.dungeon.map[this.state.y][this.state.x]);
+      this.grid.current.setValue(bestMove.x, bestMove.y, 'lavender');
+      this.setState({ bestMove });
     }
   }
 
@@ -210,7 +266,7 @@ class Game extends React.Component {
     });
 
     // Calculate if wumpus is in same direction from player as the arrow direction, if so, mark the wumpus as dead.
-    return direction === WumpusManager.direction(player, this.state.dungeon.wumpus) ?
+    return direction === GameManager.direction(player, this.state.dungeon.wumpus) ?
             WumpusManager.constants.arrowState.kill :
             WumpusManager.constants.arrowState.fired;
   }
