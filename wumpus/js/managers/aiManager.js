@@ -40,6 +40,7 @@ const AiManager = {
       AiManager.knowledge[y][x].visited = AiManager.knowledge[y][x].visited ? AiManager.knowledge[y][x].visited + 1 : 1;
       AiManager.knowledge[y][x].pit = 0;
       AiManager.knowledge[y][x].wumpus = 0;
+      AiManager.knowledge[y][x].gold = 0;
 
       return AiManager.move(x, y);
     }
