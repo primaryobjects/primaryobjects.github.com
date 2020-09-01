@@ -150,8 +150,9 @@ const AiManager = {
         if (potentialRoom) {
           // Calculate Manhatten distance.
           const distance = Math.abs(potentialRoom.y - y) + Math.abs(potentialRoom.x - x);
-          if (distance < closestSafeRoom.distance) {
-            closestSafeRoom = { distance, room: potentialRoom };
+          if (potentialRoom.visited < closestSafeRoom.visited) {
+//if (distance < closestSafeRoom.distance) {
+            closestSafeRoom = { visited/*distance*/, room: potentialRoom };
           }
         }
       }
