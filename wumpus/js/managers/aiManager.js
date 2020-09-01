@@ -143,7 +143,7 @@ const AiManager = {
 
     // All adjacent rooms are either visited or contain a possible enemy. Is there another unvisited room that is safe?
     if (!room) {
-      let closestSafeRoom = { distance: 9999 };
+      let closestSafeRoom = { visited/*distance*/: 9999 };
       for (let ry=0; ry<AiManager.knowledge.length; ry++) {
         // Find the closest unvisited safe room to the player, using the Manhatten distance.
         const potentialRoom = AiManager.knowledge[ry].find(knowledge => (knowledge.x !== x || knowledge.y !== y) && knowledge.visited && !knowledge.pit && !knowledge.wumpus);
