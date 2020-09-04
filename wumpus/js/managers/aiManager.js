@@ -3,12 +3,14 @@ const AiManager = {
   path: [],
   foundLoop: false,
   foundWumpus: false,
+  recommendedMove: {},
 
-  initialize: (playerX, playerY, width, height) => {
+  initialize: (x, y, width, height) => {
     AiManager.knowledge = [];
     AiManager.path = [];
     AiManager.foundWumpus = false;
     AiManager.foundLoop = false;
+    AiManager.recommendedMove = {};
 
     for (let y=0; y<height; y++) {
       const row = [];
@@ -48,9 +50,9 @@ const AiManager = {
 
       // Choose the next move.
       // 1,2,3,2,1
-      const move = AiManager.move(x, y);
-      if (move) {
-        AiManager.path.push(`${move.x},${move.y}`);
+      AiManager.recommendedMove = AiManager.move(x, y);
+      /*if (AiManager.recommendedMove) {
+        AiManager.path.push(`${AiManager.recommendedMove.x},${AiManager.recommendedMove.y}`);
         const threshold = 4;
         if (AiManager.path.length > threshold) {
           // Check for a repeating loop by detecting a mirror pattern in the array.
@@ -88,9 +90,18 @@ const AiManager = {
             }
           }
         }
+      }*/
+
+      if (AiManager.recommendedMove.knowledge.visited > 1) {
+        !AiManager.foundLoop && console.log('Risky business!');
+        AiManager.foundLoop = true;
+      }
+      else if (!AiManager.recommendedMove.knowledge.visited) {
+        AiManager.foundLoop && console.log('Playing it safe.');
+        AiManager.foundLoop = false;
       }
 
-      return move;
+      return AiManager.recommendedMove;
     }
   },
 
@@ -104,6 +115,8 @@ const AiManager = {
   },
 
   think: (x, y, knowledge) => {
+    // x,y = adjacent room to think about.
+    // knowledge = perceptions from the current room
     let adjRoom;
 
     // If this is the first time we've entered this room, update knowledge for adjacent rooms.
@@ -112,6 +125,11 @@ const AiManager = {
 
       if (knowledge.breeze && !adjRoom.visited) {
         adjRoom.pit += 0.25;
+      }
+
+      if (!knowledge.breeze) {
+        // If the room has no breeze, update all adjacent rooms to set pit to 0.
+        AiManager.knowledge[y][x].pit = 0;
       }
 
       if (knowledge.stench) {
@@ -319,14 +337,14 @@ const AiManager = {
     }
   },
 
-  toString: () => {
+  toString: (playerX, playerY) => {
     let result = '';
 
     for (let y=0; y < AiManager.knowledge.length; y++) {
-      result += '| ';
+      result += '|';
 
       for (let x=0; x < AiManager.knowledge[y].length; x++) {
-        result += `v: ${AiManager.pad('    ', AiManager.knowledge[y][x].visited)} p: ${AiManager.pad('    ', AiManager.knowledge[y][x].pit)} w: ${AiManager.pad('    ', AiManager.knowledge[y][x].wumpus)} g: ${AiManager.pad('    ', AiManager.knowledge[y][x].gold)} | `;
+        result += `${AiManager.knowledge[y][x].wumpus >= 0.5? '^^^' : ''}${AiManager.knowledge[y][x].wumpus === 0.25? '^' : ''}${AiManager.knowledge[y][x].pit >= 0.5 ? '@@@' : ''}${AiManager.knowledge[y][x].pit === 0.25 ? '@' : ''}${(x === AiManager.recommendedMove.x && y === AiManager.recommendedMove.y) ? '$' : ''}${(x === playerX && y === playerY) ? '*' : ''} v:${AiManager.pad('    ', AiManager.knowledge[y][x].visited)} p:${AiManager.pad('    ', AiManager.knowledge[y][x].pit)} w:${AiManager.pad('    ', AiManager.knowledge[y][x].wumpus)} g:${AiManager.pad('    ', AiManager.knowledge[y][x].gold)}${x === AiManager.recommendedMove.x && y === AiManager.recommendedMove.y ? '$$' : ''}${x === playerX && y === playerY ? '**' : ''}${AiManager.knowledge[y][x].pit >= 0.5 ? '@@@@' : ''}${AiManager.knowledge[y][x].pit === 0.25 ? '@@' : ''}${AiManager.knowledge[y][x].wumpus >= 0.5 ? '^^^^' : ''}${AiManager.knowledge[y][x].wumpus === 0.25 ? '^^' : ''}|`;
       }
       result += '\n';
     }
