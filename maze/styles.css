@@ -20,3 +20,36 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
 }
+
+/* Mobile controls */
+#mobile-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-arrow-pad {
+    display: grid;
+    grid-template-columns: 60px 60px 60px;
+    grid-template-rows: 60px 60px 60px;
+    gap: 5px;
+}
+
+.mobile-control-button {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.25);
+    color: white;
+    cursor: pointer;
+}
+
+.mobile-control-button.pressed {
+    background-color: rgba(128, 128, 128, 0.5);
+}

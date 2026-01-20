@@ -33,6 +33,7 @@ let lastFootprintPos = null;
 let footprintSide = 'left';
 const FOOTPRINT_SPACING = 1.2; // minimum distance between footprints
 let glitterPixels = [];
+let mobileControls = false; // Flag to track if mobile controls are active
 
 // Initialize the game
 function init() {
@@ -140,8 +141,169 @@ function init() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
 
+    // Detect mobile devices
+    detectMobileDevice();
+
     // Load all textures first
     loadAllTextures();
+}
+
+// Detect if the user is on a mobile device
+function detectMobileDevice() {
+    const isMobile = true;///Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        mobileControls = true;
+        createMobileControls();
+    }
+}
+
+// Create mobile control buttons
+function createMobileControls() {
+    // Create controls container
+    const controlsContainer = document.createElement('div');
+    controlsContainer.id = 'mobile-controls';
+    controlsContainer.className = 'mobile-controls';
+
+    // Create arrow pad container
+    const arrowPad = document.createElement('div');
+    arrowPad.className = 'mobile-arrow-pad';
+
+            // Create up button (top center)
+    const upButton = document.createElement('button');
+    upButton.innerHTML = '↑';
+    upButton.className = 'mobile-control-button';
+    upButton.style.gridColumn = '2';
+    upButton.style.gridRow = '1';
+    upButton.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        keys['ArrowUp'] = true;
+        this.classList.add('pressed');
+    });
+    upButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        keys['ArrowUp'] = false;
+        this.classList.remove('pressed');
+    });
+    upButton.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        keys['ArrowUp'] = true;
+        this.classList.add('pressed');
+    });
+    upButton.addEventListener('mouseup', function(e) {
+        e.preventDefault();
+        keys['ArrowUp'] = false;
+        this.classList.remove('pressed');
+    });
+    upButton.addEventListener('mouseleave', function(e) {
+        keys['ArrowUp'] = false;
+        this.classList.remove('pressed');
+    });
+
+            // Create left button (middle left)
+    const leftButton = document.createElement('button');
+    leftButton.innerHTML = '←';
+    leftButton.className = 'mobile-control-button';
+    leftButton.style.gridColumn = '1';
+    leftButton.style.gridRow = '2';
+    leftButton.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        keys['ArrowLeft'] = true;
+        this.classList.add('pressed');
+    });
+    leftButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        keys['ArrowLeft'] = false;
+        this.classList.remove('pressed');
+    });
+    leftButton.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        keys['ArrowLeft'] = true;
+        this.classList.add('pressed');
+    });
+    leftButton.addEventListener('mouseup', function(e) {
+        e.preventDefault();
+        keys['ArrowLeft'] = false;
+        this.classList.remove('pressed');
+    });
+    leftButton.addEventListener('mouseleave', function(e) {
+        keys['ArrowLeft'] = false;
+        this.classList.remove('pressed');
+    });
+
+            // Create down button (bottom center)
+    const downButton = document.createElement('button');
+    downButton.innerHTML = '↓';
+    downButton.className = 'mobile-control-button';
+    downButton.style.gridColumn = '2';
+    downButton.style.gridRow = '3';
+    downButton.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        keys['ArrowDown'] = true;
+        this.classList.add('pressed');
+    });
+    downButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        keys['ArrowDown'] = false;
+        this.classList.remove('pressed');
+    });
+    downButton.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        keys['ArrowDown'] = true;
+        this.classList.add('pressed');
+    });
+    downButton.addEventListener('mouseup', function(e) {
+        e.preventDefault();
+        keys['ArrowDown'] = false;
+        this.classList.remove('pressed');
+    });
+    downButton.addEventListener('mouseleave', function(e) {
+        keys['ArrowDown'] = false;
+        this.classList.remove('pressed');
+    });
+
+            // Create right button (middle right)
+    const rightButton = document.createElement('button');
+    rightButton.innerHTML = '→';
+    rightButton.className = 'mobile-control-button';
+    rightButton.style.gridColumn = '3';
+    rightButton.style.gridRow = '2';
+    rightButton.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        keys['ArrowRight'] = true;
+        this.classList.add('pressed');
+    });
+    rightButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        keys['ArrowRight'] = false;
+        this.classList.remove('pressed');
+    });
+    rightButton.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        keys['ArrowRight'] = true;
+        this.classList.add('pressed');
+    });
+    rightButton.addEventListener('mouseup', function(e) {
+        e.preventDefault();
+        keys['ArrowRight'] = false;
+        this.classList.remove('pressed');
+    });
+    rightButton.addEventListener('mouseleave', function(e) {
+        keys['ArrowRight'] = false;
+        this.classList.remove('pressed');
+    });
+
+    // Add buttons to arrow pad
+    arrowPad.appendChild(upButton);
+    arrowPad.appendChild(leftButton);
+    arrowPad.appendChild(downButton);
+    arrowPad.appendChild(rightButton);
+
+    // Add arrow pad to controls container
+    controlsContainer.appendChild(arrowPad);
+
+    // Add controls to the game container
+    document.getElementById('game-container').appendChild(controlsContainer);
 }
 
 function checkCameraZone() {
